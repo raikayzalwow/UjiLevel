@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # hoomly
 
 A new Flutter project.
@@ -15,3 +16,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# UjiLevel
+Uji Level RAIFA KAYLA ZAHRA bismillah
+>>>>>>> 0bc68fe82213a5f865595e6b0b5b3792dae8e373
