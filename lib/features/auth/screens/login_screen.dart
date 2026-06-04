@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../../../core/theme/app_theme.dart';
 import 'register_screen.dart';
 import 'success_screen.dart';
 import 'reset_password_screen.dart';

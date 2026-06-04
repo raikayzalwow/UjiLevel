@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'success_screen.dart';
 
 class SetupProfileScreen extends StatefulWidget {
@@ -20,7 +23,6 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
   final _phoneController = TextEditingController();
   bool _isSaving = false;
 
-  // Variabel penampung berkas citra foto profil yang dipilih
   XFile? _pickedImage;
   final ImagePicker _picker = ImagePicker();
 
@@ -39,16 +41,13 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
     super.dispose();
   }
 
-  // Fungsi internal untuk memicu sistem mengambil/memilih gambar
   Future<void> _pickImage(ImageSource source) async {
     try {
       final XFile? image = await _picker.pickImage(
         source: source,
-        maxWidth:
-            500, // Membatasi lebar max gambar untuk menghemat penyimpanan memori
-        maxHeight: 500, // Membatasi tinggi max gambar
-        imageQuality:
-            85, // Mengompresi kualitas gambar sedikit agar load aplikasi ringan
+        maxWidth: 500,
+        maxHeight: 500,
+        imageQuality: 85,
       );
       if (image != null) {
         setState(() {
@@ -60,7 +59,6 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
     }
   }
 
-  // Menampilkan BottomSheet opsi pilihan (Kamera atau Galeri)
   void _showImageSourceBottomSheet() {
     showModalBottomSheet(
       context: context,
@@ -128,26 +126,57 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
 
     setState(() => _isSaving = true);
 
-    // Di sini nanti Anda bisa mengunggah _pickedImage ke Firebase Storage jika diperlukan
-    await Future.delayed(const Duration(seconds: 2));
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) return;
 
-    if (mounted) {
-      setState(() => _isSaving = false);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const SuccessScreen()),
-      );
+      String? photoUrl;
+
+      // Upload foto ke Firebase Storage kalau ada
+      if (_pickedImage != null && !kIsWeb) {
+        final ref = FirebaseStorage.instance
+            .ref()
+            .child('profile_photos/${user.uid}.jpg');
+        await ref.putFile(File(_pickedImage!.path));
+        photoUrl = await ref.getDownloadURL();
+      }
+
+      // Simpan semua data profil ke Firestore
+      await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
+        'uid': user.uid,
+        'name': _nameController.text.trim(),
+        'username': _usernameController.text.trim(),
+        'email': _emailController.text.trim(),
+        'phone': _phoneController.text.trim(),
+        'photoUrl': photoUrl ?? '',
+        'createdAt': FieldValue.serverTimestamp(),
+      });
+
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const SuccessScreen()),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Gagal menyimpan profil: $e'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } finally {
+      if (mounted) setState(() => _isSaving = false);
     }
   }
 
-  // Widget pembantu manajemen penampilan gambar avatar
   ImageProvider? _getAvatarImage() {
     if (_pickedImage != null) {
       if (kIsWeb) {
-        // Jika berjalan di platform Web, panggil lewat Network URL internal blob
         return NetworkImage(_pickedImage!.path);
       } else {
-        // Jika berjalan di Android/iOS Mobile, ambil lewat objek File sistem
         return FileImage(File(_pickedImage!.path));
       }
     }
@@ -183,31 +212,27 @@ class _SetupProfileScreenState extends State<SetupProfileScreen> {
                 Center(
                   child: Stack(
                     children: [
-                      // === MODIFIKASI LINGKARAN AVATAR FOTO ===
                       GestureDetector(
-                        onTap:
-                            _showImageSourceBottomSheet, // Klik area lingkaran untuk ganti foto
+                        onTap: _showImageSourceBottomSheet,
                         child: CircleAvatar(
                           radius: 52,
                           backgroundColor:
-                              const Color(0xFF1B3D39).withOpacity(0.1),
-                          backgroundImage:
-                              _getAvatarImage(), // Menampilkan foto jika sudah dipilih
+                              const Color(0xFF1B3D39).withValues(alpha: 0.1),
+                          backgroundImage: _getAvatarImage(),
                           child: _pickedImage == null
                               ? const Icon(
                                   Icons.person,
                                   size: 55,
                                   color: Color(0xFF1B3D39),
                                 )
-                              : null, // Icon hilang otomatis ketika gambar berhasil di-load
+                              : null,
                         ),
                       ),
                       Positioned(
                         bottom: 0,
                         right: 4,
                         child: GestureDetector(
-                          onTap:
-                              _showImageSourceBottomSheet, // Klik tombol kamera kecil
+                          onTap: _showImageSourceBottomSheet,
                           child: Container(
                             padding: const EdgeInsets.all(8),
                             decoration: const BoxDecoration(
