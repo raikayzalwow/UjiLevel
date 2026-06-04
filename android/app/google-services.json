@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "956927034914",
+    "project_id": "hoomly-ae913",
+    "storage_bucket": "hoomly-ae913.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956927034914:android:e019a1edb0793837196c7b",
+        "android_client_info": {
+          "package_name": "com.example.hoomly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956927034914-8ff5be4b8r9mo5ccgkimbv65u5q31dph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuB7UDdXRUIrFT6XjMCCezuroJuXlD2ns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956927034914-8ff5be4b8r9mo5ccgkimbv65u5q31dph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
