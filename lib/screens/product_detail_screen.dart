@@ -87,7 +87,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     children: [
                       _buildImages(product),
                       Positioned(
-                        top: 0, left: 0, right: 0,
+                        top: 0,
+                        left: 0,
+                        right: 0,
                         height: topPad + 72,
                         child: Container(
                           decoration: BoxDecoration(
@@ -95,7 +97,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
                               colors: [
-                                Colors.black.withOpacity(0.35),
+                                Colors.black.withValues(alpha: 0.35),
                                 Colors.transparent,
                               ],
                             ),
@@ -118,7 +120,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                             final p = pp.getProductById(product.id);
                             final fav = p?.isWishlisted == true;
                             return _iconButton(
-                              icon: fav ? Icons.favorite : Icons.favorite_border,
+                              icon:
+                                  fav ? Icons.favorite : Icons.favorite_border,
                               iconColor: fav ? Colors.red : Colors.black87,
                               onTap: () => context
                                   .read<ProductProvider>()
@@ -140,11 +143,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                                 duration: const Duration(milliseconds: 250),
                                 width: active ? 22 : 7,
                                 height: 7,
-                                margin: const EdgeInsets.symmetric(horizontal: 3),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 3),
                                 decoration: BoxDecoration(
                                   color: active
                                       ? Colors.white
-                                      : Colors.white.withOpacity(0.5),
+                                      : Colors.white.withValues(alpha: 0.5),
                                   borderRadius: BorderRadius.circular(4),
                                 ),
                               );
@@ -161,7 +165,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.vertical(top: Radius.circular(28)),
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(28)),
                     ),
                     child: _buildDetail(product),
                   ),
@@ -171,7 +176,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ],
           ),
           Positioned(
-            left: 0, right: 0, bottom: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             child: _buildBottomBar(product, botPad),
           ),
         ],
@@ -183,7 +190,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     if (product.images.isEmpty) {
       return Container(
         color: Colors.grey[100],
-        child: const Icon(Icons.image_not_supported, size: 64, color: Colors.grey),
+        child:
+            const Icon(Icons.image_not_supported, size: 64, color: Colors.grey),
       );
     }
 
@@ -207,7 +215,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
         errorBuilder: (_, __, ___) => Container(
           color: Colors.grey[100],
-          child: const Icon(Icons.image_not_supported, size: 64, color: Colors.grey),
+          child: const Icon(Icons.image_not_supported,
+              size: 64, color: Colors.grey),
         ),
       ),
     );
@@ -228,7 +237,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.12),
+              color: Colors.black.withValues(alpha: 0.12),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -247,7 +256,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         children: [
           Center(
             child: Container(
-              width: 40, height: 4,
+              width: 40,
+              height: 4,
               margin: const EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 color: Colors.grey[300],
@@ -255,7 +265,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ),
           ),
-
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -286,7 +295,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
               const SizedBox(width: 12),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                 decoration: BoxDecoration(
                   color: const Color(0xFFFFF8E1),
                   borderRadius: BorderRadius.circular(20),
@@ -294,7 +304,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(Icons.star_rounded, color: Color(0xFFFFC107), size: 18),
+                    const Icon(Icons.star_rounded,
+                        color: Color(0xFFFFC107), size: 18),
                     const SizedBox(width: 4),
                     Text(
                       product.rating.toStringAsFixed(1),
@@ -315,7 +326,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             style: TextStyle(fontSize: 12, color: Colors.grey[400]),
           ),
           const SizedBox(height: 16),
-
           GestureDetector(
             onTap: () => setState(() => _isExpanded = !_isExpanded),
             child: AnimatedSize(
@@ -349,7 +359,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
           ),
           const SizedBox(height: 24),
-
           if (product.images.length > 1) ...[
             SizedBox(
               height: 68,
@@ -395,7 +404,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
             const SizedBox(height: 24),
           ],
-
           if (product.colors.isNotEmpty) ...[
             const Text(
               'Pilih Warna',
@@ -427,8 +435,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       boxShadow: [
                         BoxShadow(
                           color: active
-                              ? AppTheme.primary.withOpacity(0.35)
-                              : Colors.black.withOpacity(0.1),
+                              ? AppTheme.primary.withValues(alpha: 0.35)
+                              : Colors.black.withValues(alpha: 0.1),
                           blurRadius: active ? 8 : 4,
                         ),
                       ],
@@ -448,7 +456,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             ),
             const SizedBox(height: 24),
           ],
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -469,7 +476,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   children: [
                     _qtyButton(
                       icon: Icons.remove,
-                      onTap: _quantity > 1 ? () => setState(() => _quantity--) : null,
+                      onTap: _quantity > 1
+                          ? () => setState(() => _quantity--)
+                          : null,
                     ),
                     SizedBox(
                       width: 44,
@@ -494,7 +503,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               ),
             ],
           ),
-
           const SizedBox(height: 28),
           Divider(color: Colors.grey[100], thickness: 1),
           const SizedBox(height: 20),
@@ -520,7 +528,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               : (enabled ? Colors.white : Colors.grey[100]),
           borderRadius: BorderRadius.circular(10),
           boxShadow: filled
-              ? [BoxShadow(color: AppTheme.primary.withOpacity(0.3), blurRadius: 8)]
+              ? [
+                  BoxShadow(
+                      color: AppTheme.primary.withValues(alpha: 0.3),
+                      blurRadius: 8)
+                ]
               : null,
         ),
         child: Icon(
@@ -541,7 +553,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 16,
             offset: const Offset(0, -4),
           ),
@@ -560,11 +572,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               );
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Row(
+              content: const Row(
                 children: [
-                  const Icon(Icons.check_circle, color: Colors.white, size: 18),
-                  const SizedBox(width: 8),
-                  const Text('Berhasil ditambahkan ke keranjang!'),
+                  Icon(Icons.check_circle, color: Colors.white, size: 18),
+                  SizedBox(width: 8),
+                  Text('Berhasil ditambahkan ke keranjang!'),
                 ],
               ),
               backgroundColor: AppTheme.primary,
@@ -590,7 +602,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
             borderRadius: BorderRadius.circular(16),
             boxShadow: [
               BoxShadow(
-                color: AppTheme.primary.withOpacity(0.4),
+                color: AppTheme.primary.withValues(alpha: 0.4),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -613,7 +625,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
               Container(
                 width: 1,
                 height: 22,
-                color: Colors.white.withOpacity(0.4),
+                color: Colors.white.withValues(alpha: 0.4),
                 margin: const EdgeInsets.symmetric(horizontal: 14),
               ),
               Text(

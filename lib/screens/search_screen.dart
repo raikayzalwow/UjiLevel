@@ -16,8 +16,15 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final _searchController = TextEditingController();
   final _categories = [
-    'Semua', 'Sofa', 'Kursi', 'Meja', 'Lemari',
-    'Tempat Tidur', 'Lampu', 'Karpet', 'Dekorasi'
+    'Semua',
+    'Sofa',
+    'Kursi',
+    'Meja',
+    'Lemari',
+    'Tempat Tidur',
+    'Lampu',
+    'Karpet',
+    'Dekorasi'
   ];
 
   String _formatRupiah(double price) {
@@ -99,13 +106,18 @@ class _SearchScreenState extends State<SearchScreen> {
             final cat = _categories[i];
             final selectedCat = pp.selectedCategory;
             final isSelected = selectedCat == cat ||
-                (cat == 'Semua' && (selectedCat == 'All' || selectedCat == 'Semua' || selectedCat == null || selectedCat.isEmpty));
+                (cat == 'Semua' &&
+                    (selectedCat == 'All' ||
+                        selectedCat == 'Semua' ||
+                        selectedCat.isEmpty));
             return GestureDetector(
-              onTap: () => context.read<ProductProvider>().filterByCategory(cat),
+              onTap: () =>
+                  context.read<ProductProvider>().filterByCategory(cat),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 margin: const EdgeInsets.symmetric(horizontal: 4),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
                 decoration: BoxDecoration(
                   color: isSelected ? AppTheme.primary : AppTheme.greyBg,
                   borderRadius: BorderRadius.circular(20),
@@ -133,13 +145,13 @@ class _SearchScreenState extends State<SearchScreen> {
           return const Center(child: CircularProgressIndicator());
         }
         if (pp.products.isEmpty) {
-          return Center(
+          return const Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.search_off, size: 64, color: AppTheme.greyLight),
-                const SizedBox(height: 16),
-                const Text(
+                Icon(Icons.search_off, size: 64, color: AppTheme.greyLight),
+                SizedBox(height: 16),
+                Text(
                   'Produk tidak ditemukan',
                   style: TextStyle(
                     fontSize: 16,
@@ -147,8 +159,8 @@ class _SearchScreenState extends State<SearchScreen> {
                     color: AppTheme.grey,
                   ),
                 ),
-                const SizedBox(height: 8),
-                const Text(
+                SizedBox(height: 8),
+                Text(
                   'Coba kata kunci atau kategori lain',
                   style: TextStyle(fontSize: 13, color: AppTheme.grey),
                 ),
@@ -185,7 +197,7 @@ class _SearchScreenState extends State<SearchScreen> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -214,8 +226,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   top: 8,
                   right: 8,
                   child: GestureDetector(
-                    onTap: () =>
-                        context.read<ProductProvider>().toggleWishlist(product.id),
+                    onTap: () => context
+                        .read<ProductProvider>()
+                        .toggleWishlist(product.id),
                     child: Consumer<ProductProvider>(
                       builder: (ctx, pp, _) {
                         final p = pp.getProductById(product.id);
@@ -279,7 +292,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.star, color: AppTheme.star, size: 12),
+                          const Icon(Icons.star,
+                              color: AppTheme.star, size: 12),
                           const SizedBox(width: 2),
                           Text(
                             product.rating.toString(),

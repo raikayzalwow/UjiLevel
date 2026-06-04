@@ -23,16 +23,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Map<String, String>> _banners = [
     {'image': 'assets/images/sofa_001_11.png', 'title': 'Koleksi Sofa Terbaru'},
-    {'image': 'assets/images/kasur11.png',     'title': 'Kasur Impian Kamu'},
-    {'image': 'assets/images/meja11.png',      'title': 'Meja Elegan & Modern'},
+    {'image': 'assets/images/kasur11.png', 'title': 'Kasur Impian Kamu'},
+    {'image': 'assets/images/meja11.png', 'title': 'Meja Elegan & Modern'},
   ];
 
   final Map<String, String> _categoryImages = {
-    'Kursi':    'assets/images/kursi 4.png',
-    'Meja':     'assets/images/meja1.png',
-    'Lemari':   'assets/images/lemari1.png',
-    'Kasur':    'assets/images/kasur1.png',
-    'Sofa':     'assets/images/sofa_002_2.png',
+    'Kursi': 'assets/images/kursi 4.png',
+    'Meja': 'assets/images/meja1.png',
+    'Lemari': 'assets/images/lemari1.png',
+    'Kasur': 'assets/images/kasur1.png',
+    'Sofa': 'assets/images/sofa_002_2.png',
     'Dekorasi': 'assets/images/meja4.png',
   };
 
@@ -90,14 +90,14 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
+          const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 'Halo, Ujang! 👋',
                 style: TextStyle(fontSize: 14, color: AppTheme.grey),
               ),
-              const Text(
+              Text(
                 'Temukan furnitur\nimpianmu',
                 style: TextStyle(
                   fontSize: 20,
@@ -125,7 +125,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.06),
+                          color: Colors.black.withValues(alpha: 0.06),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -171,16 +171,16 @@ class _HomeScreenState extends State<HomeScreen> {
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.05),
+                color: Colors.black.withValues(alpha: 0.05),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
             ],
           ),
-          child: Row(
+          child: const Row(
             children: [
-              const Icon(Icons.search, color: AppTheme.grey, size: 20),
-              const SizedBox(width: 10),
+              Icon(Icons.search, color: AppTheme.grey, size: 20),
+              SizedBox(width: 10),
               Text(
                 'Cari di sini',
                 style: TextStyle(color: AppTheme.grey, fontSize: 14),
@@ -222,7 +222,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             end: Alignment.bottomCenter,
                             colors: [
                               Colors.transparent,
-                              Colors.black.withOpacity(0.4),
+                              Colors.black.withValues(alpha: 0.4),
                             ],
                           ),
                         ),
@@ -250,7 +250,7 @@ class _HomeScreenState extends State<HomeScreen> {
         SmoothPageIndicator(
           controller: _bannerController,
           count: _banners.length,
-          effect: ExpandingDotsEffect(
+          effect: const ExpandingDotsEffect(
             dotHeight: 6,
             dotWidth: 6,
             activeDotColor: AppTheme.primary,
@@ -306,9 +306,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 64,
                           fit: BoxFit.cover,
                           errorBuilder: (_, __, ___) => Container(
-                              color: AppTheme.greyLight,
-                              width: 64,
-                              height: 64),
+                              color: AppTheme.greyLight, width: 64, height: 64),
                         ),
                       ),
                       const SizedBox(height: 6),
@@ -444,7 +442,7 @@ class _HomeScreenState extends State<HomeScreen> {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 10,
               offset: const Offset(0, 3),
             ),
@@ -471,8 +469,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: 8,
                   right: 8,
                   child: GestureDetector(
-                    onTap: () =>
-                        context.read<ProductProvider>().toggleWishlist(product.id),
+                    onTap: () => context
+                        .read<ProductProvider>()
+                        .toggleWishlist(product.id),
                     child: Consumer<ProductProvider>(
                       builder: (ctx, pp, _) {
                         final p = pp.getProductById(product.id);
@@ -484,7 +483,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             shape: BoxShape.circle,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
+                                color: Colors.black.withValues(alpha: 0.1),
                                 blurRadius: 4,
                               ),
                             ],

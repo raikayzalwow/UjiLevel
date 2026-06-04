@@ -54,14 +54,14 @@ class _CartScreenState extends State<CartScreen> {
       body: Consumer<CartProvider>(
         builder: (ctx, cart, _) {
           if (cart.items.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.shopping_bag_outlined,
                       size: 80, color: AppTheme.greyLight),
-                  const SizedBox(height: 16),
-                  const Text(
+                  SizedBox(height: 16),
+                  Text(
                     'Keranjangmu masih kosong',
                     style: TextStyle(
                       fontSize: 18,
@@ -69,8 +69,8 @@ class _CartScreenState extends State<CartScreen> {
                       color: AppTheme.grey,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'Tambahkan furnitur untuk memulai',
                     style: TextStyle(fontSize: 14, color: AppTheme.grey),
                   ),
@@ -108,7 +108,7 @@ class _CartScreenState extends State<CartScreen> {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -185,8 +185,7 @@ class _CartScreenState extends State<CartScreen> {
                               .updateQuantity(item.id, item.quantity - 1),
                         ),
                         Padding(
-                          padding:
-                              const EdgeInsets.symmetric(horizontal: 12),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: Text(
                             item.quantity.toString(),
                             style: const TextStyle(
@@ -300,7 +299,7 @@ class _CartScreenState extends State<CartScreen> {
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
           color: isSelected
-              ? AppTheme.primary.withOpacity(0.05)
+              ? AppTheme.primary.withValues(alpha: 0.05)
               : AppTheme.white,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
@@ -311,8 +310,7 @@ class _CartScreenState extends State<CartScreen> {
         child: Row(
           children: [
             Icon(icon,
-                color: isSelected ? AppTheme.primary : AppTheme.grey,
-                size: 22),
+                color: isSelected ? AppTheme.primary : AppTheme.grey, size: 22),
             const SizedBox(width: 12),
             Expanded(
               child: Text(
@@ -361,7 +359,7 @@ class _CartScreenState extends State<CartScreen> {
         color: AppTheme.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 10,
             offset: const Offset(0, -3),
           ),
@@ -396,8 +394,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
               ),
               child: const Text('Checkout',
-                  style:
-                      TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
             ),
           ),
         ],

@@ -40,8 +40,7 @@ class AccountScreen extends StatelessWidget {
                     icon: Icons.language,
                     label: 'Bahasa',
                     trailing: const Text('Indonesia',
-                        style: TextStyle(
-                            fontSize: 13, color: AppTheme.grey)),
+                        style: TextStyle(fontSize: 13, color: AppTheme.grey)),
                     onTap: () => _showLanguageDialog(context),
                   ),
                   _buildTile(
@@ -156,8 +155,7 @@ class AccountScreen extends StatelessWidget {
                       ? NetworkImage(user.photoUrl)
                       : null,
                   child: user.photoUrl.isEmpty
-                      ? const Icon(Icons.person,
-                          size: 40, color: Colors.grey)
+                      ? const Icon(Icons.person, size: 40, color: Colors.grey)
                       : null,
                 ),
                 Positioned(
@@ -171,8 +169,8 @@ class AccountScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: Colors.white, width: 2),
                     ),
-                    child: const Icon(Icons.edit,
-                        color: Colors.white, size: 12),
+                    child:
+                        const Icon(Icons.edit, color: Colors.white, size: 12),
                   ),
                 ),
               ],
@@ -200,8 +198,7 @@ class AccountScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 2),
               child: Text(
                 '@${user.username}',
-                style: const TextStyle(
-                    fontSize: 12, color: AppTheme.grey),
+                style: const TextStyle(fontSize: 12, color: AppTheme.grey),
               ),
             ),
         ],
@@ -291,7 +288,7 @@ class AccountScreen extends StatelessWidget {
           Switch(
             value: value,
             onChanged: onChanged,
-            activeColor: AppTheme.primary,
+            activeThumbColor: AppTheme.primary,
           ),
         ],
       ),
@@ -413,30 +410,25 @@ class AccountScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Text('Ubah Profil',
-                style: TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.w700)),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
             TextField(
                 controller: nameCtrl,
-                decoration:
-                    const InputDecoration(labelText: 'Nama Lengkap')),
+                decoration: const InputDecoration(labelText: 'Nama Lengkap')),
             const SizedBox(height: 10),
             TextField(
                 controller: emailCtrl,
                 keyboardType: TextInputType.emailAddress,
-                decoration:
-                    const InputDecoration(labelText: 'Email')),
+                decoration: const InputDecoration(labelText: 'Email')),
             const SizedBox(height: 10),
             TextField(
                 controller: phoneCtrl,
                 keyboardType: TextInputType.phone,
-                decoration:
-                    const InputDecoration(labelText: 'Nomor Telepon')),
+                decoration: const InputDecoration(labelText: 'Nomor Telepon')),
             const SizedBox(height: 10),
             TextField(
                 controller: addrCtrl,
-                decoration:
-                    const InputDecoration(labelText: 'Alamat')),
+                decoration: const InputDecoration(labelText: 'Alamat')),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,

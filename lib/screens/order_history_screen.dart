@@ -52,14 +52,14 @@ class OrderHistoryScreen extends StatelessWidget {
       body: Consumer<OrderProvider>(
         builder: (ctx, op, _) {
           if (op.orders.isEmpty) {
-            return Center(
+            return const Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.receipt_long_outlined,
                       size: 80, color: AppTheme.greyLight),
-                  const SizedBox(height: 16),
-                  const Text(
+                  SizedBox(height: 16),
+                  Text(
                     'Belum ada pesanan',
                     style: TextStyle(
                       fontSize: 18,
@@ -67,8 +67,8 @@ class OrderHistoryScreen extends StatelessWidget {
                       color: AppTheme.grey,
                     ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
+                  SizedBox(height: 8),
+                  Text(
                     'Riwayat pesananmu akan muncul di sini',
                     style: TextStyle(fontSize: 13, color: AppTheme.grey),
                   ),
@@ -96,7 +96,7 @@ class OrderHistoryScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
+            color: Colors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -120,7 +120,7 @@ class OrderHistoryScreen extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                 decoration: BoxDecoration(
-                  color: AppTheme.primary.withOpacity(0.1),
+                  color: AppTheme.primary.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(

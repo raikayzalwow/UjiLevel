@@ -66,8 +66,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         SizedBox(height: 16),
                         Text(
                           'Belum ada notifikasi',
-                          style:
-                              TextStyle(color: AppTheme.grey, fontSize: 16),
+                          style: TextStyle(color: AppTheme.grey, fontSize: 16),
                         ),
                       ],
                     ),
@@ -81,8 +80,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       _buildSectionHeader('Hari ini'),
                       ..._buildGroupedNotifications(np.todayNotifications),
                       ...np.todayNotifications
-                          .map((n) => _buildNotificationDetail(n))
-                          .toList(),
+                          .map((n) => _buildNotificationDetail(n)),
                     ],
                     if (np.olderNotifications.isNotEmpty) ...[
                       _buildSectionHeader(
@@ -90,8 +88,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       ),
                       ..._buildGroupedNotifications(np.olderNotifications),
                       ...np.olderNotifications
-                          .map((n) => _buildNotificationDetail(n))
-                          .toList(),
+                          .map((n) => _buildNotificationDetail(n)),
                     ],
                   ],
                 );
@@ -114,8 +111,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     );
   }
 
-  List<Widget> _buildGroupedNotifications(
-      List<AppNotification> notifications) {
+  List<Widget> _buildGroupedNotifications(List<AppNotification> notifications) {
     final groups = <String, int>{};
     for (var n in notifications) {
       groups[n.type] = (groups[n.type] ?? 0) + 1;
@@ -125,8 +121,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       final isPromo = entry.key == 'promo';
       return Container(
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-        padding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: AppTheme.white,
           borderRadius: BorderRadius.circular(12),
@@ -137,18 +132,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: isPromo
-                    ? const Color(0xFFFFF3E0)
-                    : const Color(0xFFE0F2F1),
+                color:
+                    isPromo ? const Color(0xFFFFF3E0) : const Color(0xFFE0F2F1),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
                 isPromo
                     ? Icons.local_offer_outlined
                     : Icons.receipt_long_outlined,
-                color: isPromo
-                    ? const Color(0xFFFF9800)
-                    : AppTheme.primary,
+                color: isPromo ? const Color(0xFFFF9800) : AppTheme.primary,
                 size: 20,
               ),
             ),
@@ -176,8 +168,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
               ),
             ),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
                 color: AppTheme.red,
                 borderRadius: BorderRadius.circular(10),
@@ -209,12 +200,12 @@ class _NotificationScreenState extends State<NotificationScreen> {
       decoration: BoxDecoration(
         color: n.isRead
             ? AppTheme.white
-            : AppTheme.primary.withOpacity(0.04),
+            : AppTheme.primary.withValues(alpha: 0.04),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: n.isRead
               ? Colors.transparent
-              : AppTheme.primary.withOpacity(0.1),
+              : AppTheme.primary.withValues(alpha: 0.1),
         ),
       ),
       child: Row(
@@ -224,18 +215,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: isPromo
-                  ? const Color(0xFFFFF3E0)
-                  : const Color(0xFFE0F2F1),
+              color:
+                  isPromo ? const Color(0xFFFFF3E0) : const Color(0xFFE0F2F1),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
               isPromo
                   ? Icons.local_offer_outlined
                   : Icons.receipt_long_outlined,
-              color: isPromo
-                  ? const Color(0xFFFF9800)
-                  : AppTheme.primary,
+              color: isPromo ? const Color(0xFFFF9800) : AppTheme.primary,
               size: 16,
             ),
           ),
@@ -259,8 +247,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                     Text(
                       timeAgo,
-                      style: const TextStyle(
-                          fontSize: 11, color: AppTheme.grey),
+                      style:
+                          const TextStyle(fontSize: 11, color: AppTheme.grey),
                     ),
                   ],
                 ),

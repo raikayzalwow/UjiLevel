@@ -131,7 +131,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           place.locality,
           place.subAdministrativeArea,
           place.administrativeArea,
-        ].where((s) => s != null && s!.isNotEmpty).toList();
+        ].where((s) => s != null && s.isNotEmpty).toList();
 
         final address = parts.join(', ');
 
@@ -165,7 +165,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           dialogType: DialogType.error,
           animType: AnimType.scale,
           title: 'Gagal Mendeteksi Lokasi',
-          desc: 'Pastikan GPS aktif dan koneksi internet tersedia, lalu coba lagi.',
+          desc:
+              'Pastikan GPS aktif dan koneksi internet tersedia, lalu coba lagi.',
           btnOkOnPress: () {},
         ).show();
       }
@@ -237,10 +238,10 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: AppTheme.primary.withOpacity(0.2),
+                    color: AppTheme.primary.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppTheme.primary.withOpacity(0.4),
+                      color: AppTheme.primary.withValues(alpha: 0.4),
                       width: 2,
                     ),
                   ),
@@ -270,14 +271,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                 right: 0,
                 child: Center(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 12, vertical: 6),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
+                          color: Colors.black.withValues(alpha: 0.1),
                           blurRadius: 6,
                         ),
                       ],
@@ -286,9 +287,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(
-                          _isLocating
-                              ? Icons.gps_fixed
-                              : Icons.my_location,
+                          _isLocating ? Icons.gps_fixed : Icons.my_location,
                           color: AppTheme.primary,
                           size: 14,
                         ),
@@ -392,8 +391,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
           // Kode promo
           Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
             decoration: BoxDecoration(
               color: AppTheme.greyBg,
               borderRadius: BorderRadius.circular(12),
@@ -425,19 +423,16 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                       // FIX: Sweet alert untuk promo
                       AwesomeDialog(
                         context: context,
-                        dialogType: success
-                            ? DialogType.success
-                            : DialogType.error,
+                        dialogType:
+                            success ? DialogType.success : DialogType.error,
                         animType: AnimType.scale,
-                        title: success
-                            ? 'Promo Berhasil!'
-                            : 'Promo Tidak Valid',
+                        title:
+                            success ? 'Promo Berhasil!' : 'Promo Tidak Valid',
                         desc: success
                             ? 'Kode promo "${_promoController.text.toUpperCase()}" berhasil diterapkan.'
                             : 'Kode promo tidak ditemukan atau sudah kadaluarsa.',
                         btnOkOnPress: () {},
-                        btnOkColor:
-                            success ? AppTheme.primary : Colors.red,
+                        btnOkColor: success ? AppTheme.primary : Colors.red,
                       ).show();
                     }
                   },
@@ -488,16 +483,14 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-  Widget _summaryRow(String label, String value,
-      {bool isDiscount = false}) {
+  Widget _summaryRow(String label, String value, {bool isDiscount = false}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(label,
-              style:
-                  const TextStyle(fontSize: 13, color: AppTheme.grey)),
+              style: const TextStyle(fontSize: 13, color: AppTheme.grey)),
           Text(
             value,
             style: TextStyle(
@@ -519,7 +512,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         color: AppTheme.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: Colors.black.withValues(alpha: 0.06),
             blurRadius: 10,
             offset: const Offset(0, -3),
           ),
@@ -545,9 +538,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           Expanded(
             flex: 2,
             child: ElevatedButton(
-              onPressed: _isProcessing
-                  ? null
-                  : () => _placeOrder(context, cart, user),
+              onPressed:
+                  _isProcessing ? null : () => _placeOrder(context, cart, user),
               child: _isProcessing
                   ? const SizedBox(
                       height: 20,
@@ -556,8 +548,8 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                           color: Colors.white, strokeWidth: 2),
                     )
                   : const Text('Pesan Sekarang',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 15)),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w600, fontSize: 15)),
             ),
           ),
         ],
@@ -646,8 +638,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text('Edit Info Pengiriman',
-                style: TextStyle(
-                    fontSize: 18, fontWeight: FontWeight.w700)),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
             const SizedBox(height: 16),
             TextField(
                 controller: nameCtrl,
@@ -656,13 +647,11 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             TextField(
                 controller: phoneCtrl,
                 keyboardType: TextInputType.phone,
-                decoration:
-                    const InputDecoration(labelText: 'Nomor HP')),
+                decoration: const InputDecoration(labelText: 'Nomor HP')),
             const SizedBox(height: 10),
             TextField(
                 controller: addrCtrl,
-                decoration:
-                    const InputDecoration(labelText: 'Alamat')),
+                decoration: const InputDecoration(labelText: 'Alamat')),
             const SizedBox(height: 20),
             SizedBox(
               width: double.infinity,

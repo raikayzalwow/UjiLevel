@@ -99,7 +99,7 @@ class WishlistScreen extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: Colors.black.withValues(alpha: 0.06),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -182,7 +182,8 @@ class WishlistScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          const Icon(Icons.star, color: AppTheme.star, size: 12),
+                          const Icon(Icons.star,
+                              color: AppTheme.star, size: 12),
                           const SizedBox(width: 2),
                           Text(product.rating.toString(),
                               style: const TextStyle(
